@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  contact_no: MyString
+  booking_date: 2021-02-25
+  timeslot: 2021-02-25 23:48:56
+
+two:
+  name: MyString
+  contact_no: MyString
+  booking_date: 2021-02-25
+  timeslot: 2021-02-25 23:48:56
