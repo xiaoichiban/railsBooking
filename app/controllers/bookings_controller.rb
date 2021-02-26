@@ -1,9 +1,12 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   # GET /bookings or /bookings.json
   def index
-    @bookings = Booking.all
+    #@bookings = Booking.all
+    @bookings = Booking.includes(:user)
   end
 
   # GET /bookings/1 or /bookings/1.json
@@ -12,7 +15,7 @@ class BookingsController < ApplicationController
 
   # GET /bookings/new
   def new
-    @booking = Booking.new
+    @booking = current_user.bookings.build
   end
 
   # GET /bookings/1/edit
@@ -21,7 +24,9 @@ class BookingsController < ApplicationController
 
   # POST /bookings or /bookings.json
   def create
-    @booking = Booking.new(booking_params)
+
+    #@booking = Booking.new(booking_params)
+    @booking = current_user.bookings.build(booking_params)
 
     respond_to do |format|
       if @booking.save
@@ -56,6 +61,11 @@ class BookingsController < ApplicationController
     end
   end
 
+  def correct_user
+    @booking = current_user.bookings.find_by(id: params[:id])
+    redirect_to bookings_path, notice: "Not Authorised to edit this booking" if @booking.nil?
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_booking
@@ -64,6 +74,6 @@ class BookingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def booking_params
-      params.require(:booking).permit(:name, :contact_no, :booking_date, :timeslot)
+      params.require(:booking).permit(:booking_date, :timeslot, :user_id)
     end
 end

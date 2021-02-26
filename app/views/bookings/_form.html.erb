@@ -11,27 +11,27 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="field form-group">
+    <%= form.label :facility %>
+    <%= form.date_select :booking_date, class:"form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :contact_no %>
-    <%= form.text_field :contact_no %>
-  </div>
-
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :booking_date %>
-    <%= form.date_select :booking_date %>
+    <%= form.date_select :booking_date, class:"form-control" %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :timeslot %>
-    <%= form.time_select :timeslot %>
+    <%= form.time_select :timeslot, class:"form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.number_field :user_id, id: :booking_user_id,
+    class:"form-control", value: current_user.id, type: :hidden %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class:"btn btn-primary" %>
   </div>
 <% end %>
