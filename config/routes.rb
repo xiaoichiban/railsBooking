@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :timeslots
+  resources :facilities
   devise_for :users
   resources :bookings
   get 'home/about'
