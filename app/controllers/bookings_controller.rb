@@ -5,8 +5,7 @@ class BookingsController < ApplicationController
 
   # GET /bookings or /bookings.json
   def index
-    #@bookings = Booking.all
-    @bookings = Booking.includes(:user)
+    @bookings = current_user.bookings
   end
 
   # GET /bookings/1 or /bookings/1.json
@@ -16,6 +15,17 @@ class BookingsController < ApplicationController
   # GET /bookings/new
   def new
     @booking = current_user.bookings.build
+    @facilities = Facility.all
+    @facility = Facility.find_by(id: params[:id])
+    redirect_to facilities_path, notice: "Not Facility with specified id" if @facility.nil?
+    @available_slots = Timeslot.all.where("id != ?", Booking.where(facility_id: params[:id]).where("booking_date = ?", params[:date].presence || Date.today).map(&:timeslot_id).presence || 0)
+
+    @bookings_by_facility_date_filtered = Booking.includes(:facility, :user).where(facility_id: params[:id]).where("booking_date >= ?", params[:date].presence || Date.today)
+    @available_slots_by_facility_date_filtered = Timeslot.all.where.not(:id => Booking.where(facility_id: params[:id]).where("booking_date = ?", params[:date].presence || Date.today).map(&:timeslot_id).presence || 0)
+
+    #@available_slots_by_facility_date_filtered = Timeslot.all.where("id !=?", Booking.where(facility_id: params[:id]).where("booking_date = ?", params[:date].presence || Date.today).map(&:timeslot_id).presence || 0)
+    #@available_slots_by_facility_date_filtered = Timeslot.all.find_by(id: Booking.where(facility_id: params[:id]).where("booking_date = ?", params[:date].presence || Date.today).map(&:timeslot_id).presence || 0)
+
   end
 
   # GET /bookings/1/edit
@@ -74,6 +84,6 @@ class BookingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def booking_params
-      params.require(:booking).permit(:booking_date, :timeslot, :user_id)
+      params.require(:booking).permit(:booking_date, :timeslot, :user_id, :facility_id, :timeslot_id)
     end
 end

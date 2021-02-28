@@ -8,6 +8,10 @@ class FacilitiesController < ApplicationController
 
   # GET /facilities/1 or /facilities/1.json
   def show
+    @all_upcoming_bookings_by_facility = Booking.includes(:facility, :user).where(facility_id: params[:id]).where("booking_date >= ?", Date.today)
+    @bookings_by_facility_date_filtered = Booking.includes(:facility, :user).where(facility_id: params[:id]).where("booking_date >= ?", params[:date].presence || Date.today)
+    @available_slots_by_facility_today = Timeslot.all.where("id != ?", Booking.where(facility_id: params[:id]).where("booking_date = ?", Date.today).map(&:timeslot_id).presence || 0)
+    @available_slots_by_facility_date_filtered = Timeslot.all.where("id != ?", Booking.where(facility_id: params[:id]).where("booking_date = ?", params[:date].presence || Date.today).map(&:timeslot_id).presence || 0)
   end
 
   # GET /facilities/new
