@@ -1,33 +1,29 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Facilities</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Capacity</th>
-      <th>Whiteboard</th>
-      <th>Conferencing</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @facilities.each do |facility| %>
-      <tr>
-        <td><%= facility.name %></td>
-        <td><%= facility.capacity %></td>
-        <td><%= facility.whiteboard %></td>
-        <td><%= facility.conferencing %></td>
-        <td><%= link_to 'Show', facility %></td>
-        <td><%= link_to 'Edit', edit_facility_path(facility) %></td>
-        <td><%= link_to 'Destroy', facility, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<h1>Facilities</h1><% link_to 'Create Facility', new_facility_path %><br>
 <br>
-
-<%= link_to 'New Facility', new_facility_path %>
+<div class="row">
+  <% @facilities.each do |facility| %><br>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-header">
+        <h4><%= facility.name %></h4>
+      </div>
+      <div class="card-body">
+        <p class="card-text">
+          <b>Room capacity: </b><%= facility.capacity %><br>
+          <b>Whiteboard: </b><%= facility.whiteboard %><br>
+          <% if facility.conferencing == true %>
+            <b>Conferencing capability: <span style="color: green">yes</span></b> <br>
+          <%else%>
+            <b>Conferencing capability: <span style="color: red">no</span></b> <br>
+          <%end%>
+        </p>
+        <%= link_to 'More Info', facility, class: "btn btn-primary" %>
+        <% link_to 'Edit', edit_facility_path(facility) %>
+        <% link_to 'Destroy', facility, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
