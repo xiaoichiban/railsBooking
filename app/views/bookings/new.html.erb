@@ -1,6 +1,84 @@
-<h1>Add New Booking</h1>
+<% if params[:id] && params[:date] %>
+	<h1>Add New Booking</h1>
+<%else%>
+	<h1>Select facility and date</h1>
+<%end%>
 <br>
+<p id="notice"><%= notice %></p>
+<%= form_tag new_booking_path, :method => 'get' do %>
+  <p>
+    Facility: <%= select_tag 'id', options_for_select(@facilities.collect{ |u| [u.name, u.id] }) %>
+    Date: <%= date_field_tag :date, params[:date], value: params[:date].presence || Date.today %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
 
-<%= render 'form', booking: @booking %>
+<div class="card">
+  <div class="card-header">
+    <h4><%= @facility.name %></h4>
+  </div>
+  <div class="card-body">
+    <p class="card-text">
+      <b>Room capacity: </b><%= @facility.capacity %><br><br>
+      <b>Whiteboard: </b><%= @facility.whiteboard %><br><br>
+      <% if @facility.conferencing == true %>
+        <b>Conferencing capability: <span style="color: green">yes</span></b> <br><br>
+      <%else%>
+        <b>Conferencing capability: <span style="color: red">no</span></b> <br><br>
+      <%end%>
+    </p>
+
+    <h4>Booked slots on <b style="color: #17a2b8"><%= params[:date].presence || Date.today %></b></h4>
+	  <table class="table table-bordered table-hover">
+	    <thead class="thead-dark">
+	      <tr>
+	        <th>Name</th>
+	        <th>Email</th>
+	        <th>Timeslot</th>
+	        <th colspan="1"></th>
+	      </tr>
+	    </thead>
+
+	    <tbody>
+	      <% @bookings_by_facility_date_filtered.each do |booking| %>
+	        <tr>
+	          <td><%= booking.user.name %></td>
+	          <td><%= booking.user.email %></td>
+	          <td><%= booking.timeslot.time %></td>
+	          <% if current_user.id == booking.user_id %>
+	          <td><%= link_to 'Delete', booking, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-outline-danger" %></td>
+	          <%end%>
+	        </tr>
+	      <% end %>
+	    </tbody>
+	  </table>
+	<br>
+	  <table class="table table-bordered table-hover">
+	    <thead class="thead-dark">
+	      <tr>
+	        <th>Available timeslots for <%= params[:date].presence || Date.today %>:</th>
+	      </tr>
+	    </thead>
+
+	    <tbody>
+	      <% if @available_slots_by_facility_date_filtered.empty? %>
+	      	<tr>
+	          <td>No available slots<br><br> select another date/facility</td>
+	        </tr>
+	      <% else %>
+		      <% @available_slots_by_facility_date_filtered.each do |timeslot|%>
+		        <tr>
+		          <td><%= timeslot.time %></td>
+		        </tr>
+		  	  <% end %>
+	      <% end %>
+	    </tbody>
+	  </table>
+  </div>
+</div>
+
+<% if params[:id] && params[:date] %>
+	<%= render 'form', booking: @booking %>
+<%end%>
 <br>
-<%= link_to 'Back', bookings_path, class:"btn btn-secondary" %>
+<%= link_to 'Back', facilities_path, class:"btn btn-secondary" %>

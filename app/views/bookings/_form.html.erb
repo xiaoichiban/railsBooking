@@ -10,28 +10,28 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field form-group">
-    <%= form.label :facility %>
-    <%= form.date_select :booking_date, class:"form-control" %>
+      <%= form.text_field :facility_id, value: params[:id] ,class:"form-control", type: :hidden %>
   </div>
 
   <div class="field form-group">
-    <%= form.label :booking_date %>
-    <%= form.date_select :booking_date, class:"form-control" %>
+    <%= form.date_field :booking_date, value: params[:date], type: :hidden %>
   </div>
+  <% if @available_slots_by_facility_date_filtered.empty? %>
+  <% else %>
+    <div class="field form-group">
+      <%= form.label :timeslot %>
+      <% form.select :timeslot_id, Timeslot.all.collect {|u| [u.time, u.id]}, class:"form-control" %>
+      <%= form.select :timeslot_id, @available_slots.each.collect {|u| [u.time, u.id]}, class:"form-control" %>
+    </div>
 
-  <div class="field form-group">
-    <%= form.label :timeslot %>
-    <%= form.time_select :timeslot, class:"form-control" %>
-  </div>
+    <div class="field form-group">
+      <%= form.number_field :user_id, id: :booking_user_id,
+      class:"form-control", value: current_user.id, type: :hidden %>
+    </div>
 
-  <div class="field form-group">
-    <%= form.number_field :user_id, id: :booking_user_id,
-    class:"form-control", value: current_user.id, type: :hidden %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit class:"btn btn-primary" %>
-  </div>
+    <div class="actions">
+      <%= form.submit class:"btn btn-primary" %>
+    </div>
+  <%end%>
 <% end %>
