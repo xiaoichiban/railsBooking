@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
 
-<h1>Bookings</h1>
+<h1>My Bookings</h1>
 <div class="table-responsive">
   <table class="table table-bordered table-hover">
     <thead class="thead-dark">
@@ -16,13 +16,13 @@
 
     <tbody>
       <% @bookings.each do |booking| %>
-      <%= booking.inspect %>
+      <% booking.inspect %>
         <tr>
-          <td><%= booking.user.email %></td>
-          <td><%= booking.name %></td>
+          <td><%= booking.facility.name %></td>
+          <td><%= booking.user.name %></td>
           <td><%= booking.user.contact_number %></td>
           <td><%= booking.booking_date %></td>
-          <td><%= booking.timeslot %></td>
+          <td><%= booking.timeslot.time %></td>
           <td><%= link_to 'Info', booking, class:"btn btn-sm btn-outline-info" %></td>
           <td><%= link_to 'Delete', booking, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-outline-danger" %></td>
         </tr>
