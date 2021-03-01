@@ -22,3 +22,16 @@ Run `rails db:setup` to load setup data. Refer to `db/seeds.db` for preload data
 ## Development server
 
 Run `rails s` for a dev server. Navigate to `http://localhost:3000/`. The app will automatically reload if you change any of the source files.
+
+## Accounts Login
+
+`Admin: email- admin@gmail.com, password: password`
+`User: tom@gmail.com, password: password`
+
+Refer to `db/seeds.db` for more details.
+
+
+* Admin special functionalities
+
+Only `Admin` is able to carry out facilities and timeslot management (Create and Edit).
+`Admin` are also able to view all bookings made by other users.
