@@ -2,21 +2,24 @@
 
 <h1>Timeslots</h1>
 
-<table>
-  <thead>
+<table class="table">
+  <thead class="thead-dark">
     <tr>
-      <th>Time</th>
-      <th colspan="3"></th>
+      <th colspan="5">Time</th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @timeslots.each do |timeslot| %>
       <tr>
-        <td><%= timeslot.time %></td>
-        <td><%= link_to 'Show', timeslot %></td>
-        <td><%= link_to 'Edit', edit_timeslot_path(timeslot) %></td>
-        <td><%= link_to 'Destroy', timeslot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><h4><%= timeslot.time %></h4></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><%= link_to 'Edit', edit_timeslot_path(timeslot), class:"btn btn-sm btn-secondary" %></td>
+        <td><%= link_to 'Remove', timeslot, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +27,4 @@
 
 <br>
 
-<%= link_to 'New Timeslot', new_timeslot_path %>
+<%= link_to 'New Timeslot', new_timeslot_path, class:"btn btn-primary" %>
