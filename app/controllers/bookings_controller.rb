@@ -1,11 +1,12 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   # GET /bookings or /bookings.json
   def index
-    @bookings = current_user.bookings
+    @bookings = current_user.bookings.where("booking_date >= ?", Date.today)
+    @bookings_admin = Booking.includes(:facility, :user, :timeslot).where("booking_date >= ?", Date.today)
   end
 
   # GET /bookings/1 or /bookings/1.json
