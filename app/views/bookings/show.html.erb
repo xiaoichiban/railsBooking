@@ -26,7 +26,11 @@
 	</p>
 	<br>
 	<p class="lead">
-		<%= link_to 'Delete Booking', @booking, method: :delete, data: { confirm: 'Are you sure to delete booking?' }, class:"btn btn-danger", :style=> 'margin-right:50px;'%>
-	  <%= link_to 'Back', bookings_path, class:"btn btn-secondary" %>
+		<% if user_signed_in? && current_user.email == 'admin@gmail.com' %>
+		  <%= link_to 'Show all bookings', bookings_path, class:"btn btn-primary", :style=> 'margin-right:50px;' %>
+		<%else%>
+		  <%= link_to 'Show my upcoming bookings', bookings_path, class:"btn btn-primary", :style=> 'margin-right:50px;' %>
+		<%end%>
+		<%= link_to 'Delete Booking', @booking, method: :delete, data: { confirm: 'Are you sure to delete booking?' }, class:"btn btn-danger"%>
   	</p>
 </div>

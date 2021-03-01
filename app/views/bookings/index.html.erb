@@ -1,6 +1,9 @@
-<% if user_signed_in? %>
-
-<h1>My Bookings</h1>
+<% if user_signed_in? && current_user.email == 'admin@gmail.com' %>
+<h1>All Bookings made</h1>
+<% @bookings = @bookings_admin %>
+<%else%>
+<h1>My Upcoming Bookings</h1>
+<%end%>
 <div class="table-responsive">
   <table class="table table-bordered table-hover">
     <thead class="thead-dark">
@@ -15,25 +18,20 @@
     </thead>
 
     <tbody>
-      <% @bookings.each do |booking| %>
-      <% booking.inspect %>
-        <tr>
-          <td><%= booking.facility.name %></td>
-          <td><%= booking.user.name %></td>
-          <td><%= booking.user.contact_number %></td>
-          <td><%= booking.booking_date %></td>
-          <td><%= booking.timeslot.time %></td>
-          <td><%= link_to 'Info', booking, class:"btn btn-sm btn-outline-info" %></td>
-          <td><%= link_to 'Delete', booking, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-outline-danger" %></td>
-        </tr>
-      <% end %>
+        <% @bookings.each do |booking| %>
+          <tr>
+            <td><%= booking.facility.name %></td>
+            <td><%= booking.user.name %></td>
+            <td><%= booking.user.contact_number %></td>
+            <td><%= booking.booking_date %></td>
+            <td><%= booking.timeslot.time %></td>
+            <td><%= link_to 'Info', booking, class:"btn btn-sm btn-outline-info" %></td>
+            <td><%= link_to 'Delete', booking, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-outline-danger" %></td>
+          </tr>
+        <% end %>
     </tbody>
   </table>
 </div>
 <br>
 
-<%= link_to 'New Booking', new_booking_path, class:"btn btn-primary" %>
-
-<% else %>
-  <h1>Home#index</h1>
-<% end %>
+<%= link_to 'New Booking', facilities_path, class:"btn btn-primary" %>

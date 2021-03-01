@@ -16,9 +16,11 @@
         <li class="nav-item">
         <%= link_to 'My Bookings', bookings_path, class:"nav-link" %>
         </li>
-        <li class="nav-item">
-        <%= link_to 'Timeslots', timeslots_path, class:"nav-link" %>
-        </li>
+        <% if user_signed_in? && current_user.email == 'admin@gmail.com' %>
+          <li class="nav-item">
+          <%= link_to 'Timeslots', timeslots_path, class:"nav-link" %>
+          </li>
+        <%end%>
         <li class="nav-item">
           <%= link_to 'Edit Profile', edit_user_registration_path, class:"nav-link" %>
         </li>
@@ -36,7 +38,7 @@
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+      <%= link_to 'Search', facility_path(1), class: "btn btn-outline-info my-2 my-sm-0" %>
     </form>
   </div>
 </nav>

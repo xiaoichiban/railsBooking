@@ -1,8 +1,8 @@
 <%= form_with(model: booking) do |form| %>
   <% if booking.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
-
+    <div class="alert alert-danger" role="alert" id="error_explanation">
+      <h4><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</h4>
+      <hr>
       <ul>
         <% booking.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,27 +11,25 @@
     </div>
   <% end %>
   <div class="field form-group">
-      <%= form.text_field :facility_id, value: params[:id] ,class:"form-control", type: :hidden %>
+      <%= form.text_field :facility_id, value: params[:id] ,class: "form-control", type: :hidden %>
   </div>
 
   <div class="field form-group">
     <%= form.date_field :booking_date, value: params[:date], type: :hidden %>
   </div>
-  <% if @available_slots_by_facility_date_filtered.empty? %>
-  <% else %>
+  <% if !@available_slots_by_facility_date_filtered.empty? %>
     <div class="field form-group">
-      <%= form.label :timeslot %>
-      <% form.select :timeslot_id, Timeslot.all.collect {|u| [u.time, u.id]}, class:"form-control" %>
-      <%= form.select :timeslot_id, @available_slots.each.collect {|u| [u.time, u.id]}, class:"form-control" %>
+      <%= form.label :select_timeslot %>
+      <%= form.select :timeslot_id, @available_slots.each.collect {|u| [u.time, u.id]}, class: "form-control" %>
     </div>
 
     <div class="field form-group">
       <%= form.number_field :user_id, id: :booking_user_id,
-      class:"form-control", value: current_user.id, type: :hidden %>
+      class: "form-control", value: current_user.id, type: :hidden %>
     </div>
 
     <div class="actions">
-      <%= form.submit class:"btn btn-primary" %>
+      <%= form.submit class: "btn btn-primary" %>
     </div>
   <%end%>
 <% end %>
