@@ -15,10 +15,10 @@ Refer [Rails start up](https://guides.rubyonrails.org/getting_started.html) for 
 
 Run `bundle install` to install all gem files.
 
-## Development server
-
-Run `rails s` for a dev server. Navigate to `http://localhost:3000/`. The app will automatically reload if you change any of the source files.
-
 ## Configuration for database setup and data creation
 
 Run `rails db:setup` to load setup data. Refer to `db/seeds.db` for preload data.
+
+## Development server
+
+Run `rails s` for a dev server. Navigate to `http://localhost:3000/`. The app will automatically reload if you change any of the source files.
