@@ -1,12 +1,5 @@
 <h1>New Facility</h1>
 
-<%= form_tag facility_path, :method => 'get' do %>
-    <p>
-      <%= date_field_tag :date, params[:date], value: Date.today %>
-      <%= submit_tag "Search", :name => nil %>
-    </p>
-<% end %>
-
 <%= render 'form', facility: @facility %>
 
 <%= link_to 'Back', facilities_path %>
