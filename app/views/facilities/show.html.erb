@@ -42,7 +42,7 @@
 			          <td><%= booking.user.name %></td>
 			          <td><%= booking.user.email %></td>
 			          <td><%= booking.timeslot.time %></td>
-			          <% if current_user.id == booking.user_id %>
+			          <% if  user_signed_in? && current_user.id == booking.user_id %>
 			          <td><%= link_to 'Delete', booking, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-sm btn-outline-danger" %></td>
 			          <%end%>
 			        </tr>
