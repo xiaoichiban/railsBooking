@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  capacity: 1
+facility_1:
+  name: "Galaxy Space 1"
+  capacity: 10
   whiteboard: 1
-  conferencing: false
+  conferencing: true
 
-two:
-  name: MyString
-  capacity: 1
+facility_2:
+  name: "Galaxy Space 2"
+  capacity: 5
   whiteboard: 1
   conferencing: false

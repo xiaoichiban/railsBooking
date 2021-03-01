@@ -2,7 +2,7 @@ require "test_helper"
 
 class FacilitiesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @facility = facilities(:one)
+    @facility = facilities(:facility_1)
   end
 
   test "should get index" do
