@@ -1,4 +1,7 @@
 class Booking < ApplicationRecord
+
+	validates :facility_id, :booking_date, :timeslot_id, :user_id, presence: true
+
 	belongs_to :user
 	belongs_to :facility
 	belongs_to :timeslot
