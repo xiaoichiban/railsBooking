@@ -9,10 +9,10 @@
 	# admin id = 1. Admin can manage Timeslot and Facilities
 	# id 2-6 normal users
 	users = User.create([
-		{name: 'admin', email: 'admin@gmail.com', password: 'password', password_confirmation: 'password', contact_number: '91001234'},
+		{name: 'admin', email: 'admin@gmail.com', password: 'password', password_confirmation: 'password', contact_number: '91019234'},
 		{name: 'tom', email: 'tom@gmail.com', password: 'password', password_confirmation: 'password', contact_number: '92338871'},
 		{name: 'sam', email: 'sam@gmail.com', password: 'password', password_confirmation: 'password', contact_number: '92008871'},
-		{name: 'lily', email: 'lily@gmail.com', password: 'password', password_confirmation: 'password', contact_number: '91001143'},
+		{name: 'lily', email: 'lily@gmail.com', password: 'password', password_confirmation: 'password', contact_number: '91019143'},
 		{name: 'lisa', email: 'lisa@gmail.com', password: 'password', password_confirmation: 'password', contact_number: '97335471'},
 		{name: 'alexis', email: 'alexis@gmail.com', password: 'password', password_confirmation: 'password', contact_number: '97115523'},
 	])
@@ -35,16 +35,22 @@
 
 	#Galaxy Room 1 (id 1) is left with 5pm slot
 	bookings = Booking.create([
-		{booking_date: '01-03-2021', user_id: 3, facility_id: 1, timeslot_id: 1},
-		{booking_date: '01-03-2021', user_id: 3, facility_id: 1, timeslot_id: 2},
-		{booking_date: '01-03-2021', user_id: 3, facility_id: 1, timeslot_id: 3},
-		{booking_date: '01-03-2021', user_id: 4, facility_id: 1, timeslot_id: 4},
-		{booking_date: '01-03-2021', user_id: 4, facility_id: 1, timeslot_id: 5},
-		{booking_date: '01-03-2021', user_id: 5, facility_id: 1, timeslot_id: 6},
-		{booking_date: '01-03-2021', user_id: 5, facility_id: 1, timeslot_id: 7},
-		{booking_date: '01-03-2021', user_id: 2, facility_id: 1, timeslot_id: 8},
+		{booking_date: '19-03-2021', user_id: 3, facility_id: 1, timeslot_id: 1},
+		{booking_date: '19-03-2021', user_id: 3, facility_id: 1, timeslot_id: 2},
+		{booking_date: '19-03-2021', user_id: 3, facility_id: 1, timeslot_id: 3},
+		{booking_date: '19-03-2021', user_id: 4, facility_id: 1, timeslot_id: 4},
+		{booking_date: '19-03-2021', user_id: 4, facility_id: 1, timeslot_id: 5},
+		{booking_date: '19-03-2021', user_id: 5, facility_id: 1, timeslot_id: 6},
+		{booking_date: '19-03-2021', user_id: 5, facility_id: 1, timeslot_id: 7},
+		{booking_date: '19-03-2021', user_id: 2, facility_id: 1, timeslot_id: 8},
 
-		{booking_date: '02-03-2021', user_id: 6, facility_id: 2, timeslot_id: 2},
-		{booking_date: '02-03-2021', user_id: 6, facility_id: 3, timeslot_id: 4},
-		{booking_date: '02-03-2021', user_id: 4, facility_id: 4, timeslot_id: 5},
+		{booking_date: '18-03-2021', user_id: 5, facility_id: 1, timeslot_id: 1},
+		{booking_date: '18-03-2021', user_id: 5, facility_id: 1, timeslot_id: 2},
+		{booking_date: '18-03-2021', user_id: 4, facility_id: 1, timeslot_id: 3},
+		{booking_date: '18-03-2021', user_id: 6, facility_id: 1, timeslot_id: 4},
+		{booking_date: '18-03-2021', user_id: 6, facility_id: 1, timeslot_id: 5},
+
+		{booking_date: '18-03-2021', user_id: 6, facility_id: 2, timeslot_id: 2},
+		{booking_date: '18-03-2021', user_id: 6, facility_id: 3, timeslot_id: 4},
+		{booking_date: '18-03-2021', user_id: 4, facility_id: 4, timeslot_id: 5},
 	])
