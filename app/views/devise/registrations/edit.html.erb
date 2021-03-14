@@ -41,7 +41,7 @@
       <div class="field form-group">
         <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
         <br />
-        <%= f.password_field :current_password, autocomplete: "current-password", class:"form-control" %>
+        <%= f.password_field :current_password, required: true, autocomplete: "current-password", class:"form-control" %>
         <em style="color: red">*required</em>
       </div>
 
