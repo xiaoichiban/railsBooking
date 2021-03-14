@@ -19,9 +19,9 @@ class BookingsController < ApplicationController
     @facilities = Facility.all
     @facility = Facility.find_by(id: params[:id])
     redirect_to facilities_path, notice: "Not Facility with specified id" if @facility.nil?
-    @available_slots = Timeslot.all.where("id != ?", Booking.where(facility_id: params[:id]).where("booking_date = ?", params[:date].presence || Date.today).map(&:timeslot_id).presence || 0)
+    @available_slots = Timeslot.all.where.not(:id => Booking.where(facility_id: params[:id]).where("booking_date = ?", params[:date].presence || Date.today).map(&:timeslot_id).presence || 0)
 
-    @bookings_by_facility_date_filtered = Booking.includes(:facility, :user).where(facility_id: params[:id]).where("booking_date >= ?", params[:date].presence || Date.today)
+    @bookings_by_facility_date_filtered = Booking.includes(:facility, :user).where(facility_id: params[:id]).where("booking_date = ?", params[:date].presence || Date.today)
     @available_slots_by_facility_date_filtered = Timeslot.all.where.not(:id => Booking.where(facility_id: params[:id]).where("booking_date = ?", params[:date].presence || Date.today).map(&:timeslot_id).presence || 0)
 
     #@available_slots_by_facility_date_filtered = Timeslot.all.where("id !=?", Booking.where(facility_id: params[:id]).where("booking_date = ?", params[:date].presence || Date.today).map(&:timeslot_id).presence || 0)
